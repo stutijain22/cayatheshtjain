@@ -1,0 +1,20 @@
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    width: 100%;
+    flex: 1;
+}
+
+h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
