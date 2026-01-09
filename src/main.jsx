@@ -3,8 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import './index.css'
 import App from './App.jsx'
-
-const GOOGLE_CLIENT_ID = "YOUR_GOOGLE_CLIENT_ID_HERE"; // Replace with your actual Client ID
+import { GOOGLE_CLIENT_ID } from './constants'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

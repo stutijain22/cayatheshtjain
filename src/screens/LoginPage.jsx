@@ -1,55 +1,63 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import './Project.css';
 import Button from '../components/Button';
+import { useToast } from '../components/ToastContext';
 
 const LoginPage = () => {
+    const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const { showToast } = useToast();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Simulating manual login success
+        const mockUser = {
+            name: email.split('@')[0], // Use email prefix as name
+            email: email,
+            manual: true
+        };
+        localStorage.setItem('user', JSON.stringify(mockUser));
+        localStorage.setItem('isAuthenticated', 'true');
+        showToast(`Welcome back, ${mockUser.name}!`);
+        navigate('/');
+    };
+
     const handleGoogleSuccess = (response) => {
-        const userInfo = jwtDecode(response.credential);
-        console.log('User Info:', userInfo);
-        alert(`Welcome ${userInfo.name}! Email: ${userInfo.email}`);
-        // Yahan backend API call kar sakte ho
+        try {
+            const userInfo = jwtDecode(response.credential);
+            console.log('User Info:', userInfo);
+
+            // Store user data in localStorage to persist login state
+            localStorage.setItem('user', JSON.stringify(userInfo));
+            localStorage.setItem('isAuthenticated', 'true');
+
+            showToast(`Welcome back, ${userInfo.name}!`);
+
+            // Redirect to home page
+            navigate('/');
+        } catch (error) {
+            console.error('Login failed:', error);
+            showToast('Login failed. Please try again.', 'error');
+        }
     };
 
     const handleGoogleError = () => {
-        alert('Google Login Failed');
+        showToast('Google Login Failed', 'error');
     };
 
     return (
         <div className="auth-page">
-            <Link to="/" className="back-to-home">
-                ← Back to Home
-            </Link>
+
 
             <div className="auth-container">
                 <div className="auth-card">
-                    <div className="auth-logo">
-                        <img src="/webLogo.jpg" alt="Logo" />
-                        <h3>Yathesht Jain</h3>
-                    </div>
 
-                    <form className="auth-form">
+                    <form className="auth-form" onSubmit={handleSubmit}>
                         <h2 className="auth-title">Welcome Back</h2>
                         <p className="auth-subtitle">Login to access your account</p>
-
-                        {/* Google Login Component */}
-                        <div className="google-login-wrapper">
-                            <GoogleLogin
-                                onSuccess={handleGoogleSuccess}
-                                onError={handleGoogleError}
-                                useOneTap
-                                theme="outline"
-                                size="large"
-                                text="continue_with"
-                                shape="rectangular"
-                            />
-                        </div>
-
-                        <div className="auth-divider">
-                            <span>OR</span>
-                        </div>
 
                         <div className="form-group">
                             <label htmlFor="login-email">Email Address</label>
@@ -57,6 +65,8 @@ const LoginPage = () => {
                                 type="email"
                                 id="login-email"
                                 placeholder="Enter your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 required
                             />
                         </div>
@@ -78,6 +88,23 @@ const LoginPage = () => {
                         <Button variant="primary" fullWidth type="submit">
                             Login
                         </Button>
+
+                        <div className="auth-divider">
+                            <span>OR</span>
+                        </div>
+
+                        {/* Google Login Component */}
+                        <div className="google-login-wrapper">
+                            <GoogleLogin
+                                onSuccess={handleGoogleSuccess}
+                                onError={handleGoogleError}
+                                theme="outline"
+                                size="large"
+                                text="continue_with"
+                                shape="pill"
+                                use_fedcm_for_prompt={true}
+                            />
+                        </div>
 
                         <p className="auth-footer-text">
                             Don't have an account? <Link to="/signup" className="auth-link">Sign Up</Link>

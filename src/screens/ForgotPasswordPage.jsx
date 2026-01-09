@@ -6,9 +6,7 @@ import Button from '../components/Button';
 const ForgotPasswordPage = () => {
     return (
         <div className="auth-page">
-            <Link to="/" className="back-to-home">
-                ← Back to Home
-            </Link>
+
 
             <div className="auth-container">
                 <div className="auth-card">
