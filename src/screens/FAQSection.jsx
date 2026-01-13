@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Section from '../components/Section';
 import FAQItem from '../components/FAQItem';
+import Reveal from '../components/Reveal';
 import './Project.css';
 
 const FAQSection = () => {
@@ -60,19 +61,22 @@ const FAQSection = () => {
 
             <div className="faq-content-wrapper">
                 <div className="container">
-                    <div className="section-header align-center">
-                        <h2 className="section-title" style={{ color: '#fff' }}>Frequently Asked Questions</h2>
-                        <p className="section-subtitle" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>Find answers to common questions about our services</p>
-                    </div>
+                    <Reveal direction="up">
+                        <div className="section-header align-center">
+                            <h2 className="section-title" style={{ color: '#fff' }}>Frequently Asked Questions</h2>
+                            <p className="section-subtitle" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>Find answers to common questions about our services</p>
+                        </div>
+                    </Reveal>
                     <div className="faq-list">
                         {faqs.map((faq, index) => (
-                            <FAQItem
-                                key={index}
-                                question={faq.question}
-                                answer={faq.answer}
-                                isOpen={openIndex === index}
-                                onToggle={() => handleToggle(index)}
-                            />
+                            <Reveal key={index} direction="up" delay={(index % 4) + 1}>
+                                <FAQItem
+                                    question={faq.question}
+                                    answer={faq.answer}
+                                    isOpen={openIndex === index}
+                                    onToggle={() => handleToggle(index)}
+                                />
+                            </Reveal>
                         ))}
                     </div>
                 </div>

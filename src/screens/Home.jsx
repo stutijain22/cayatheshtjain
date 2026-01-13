@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import './Project.css';
 import Button from '../components/Button';
+import Reveal from '../components/Reveal';
+import './Project.css';
 
 const Home = () => {
     const svgRef = useRef(null);
@@ -23,10 +24,10 @@ const Home = () => {
             </video>
 
             <div className="hero">
-                <div className="hero-center">
+                <Reveal direction="up" className="hero-center">
                     <h2 className="slide-in-text">Grow your financial health</h2>
                     <Button variant="primary" className="journey-btn">Start your journey</Button>
-                </div>
+                </Reveal>
             </div>
         </div>
     );

@@ -58,7 +58,16 @@ const Header = () => {
             }
 
             const scrollPosition = window.scrollY + 100; // Offset for header height
+            const windowHeight = window.innerHeight;
+            const scrollHeight = document.documentElement.scrollHeight;
 
+            // Check if we are at the very bottom (footer area)
+            if (window.scrollY + windowHeight >= scrollHeight - 50) {
+                setActiveSection('');
+                return;
+            }
+
+            let currentSection = '';
             for (const section of sections) {
                 const element = document.getElementById(section);
                 if (element) {
@@ -66,10 +75,11 @@ const Header = () => {
                     const height = element.offsetHeight;
 
                     if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
-                        setActiveSection(section);
+                        currentSection = section;
                     }
                 }
             }
+            setActiveSection(currentSection);
         };
 
         window.addEventListener('scroll', handleScroll);
@@ -133,53 +143,29 @@ const Header = () => {
 
                 <nav className={`nav ${isMenuOpen ? 'nav-open' : ''}`}>
                     <ul className="nav-list">
-                        <li className="nav-item">
-                            <span
-                                className={`nav-link ${activeSection === 'home' && !isDisclaimersOpen ? 'active' : ''}`}
-                                onClick={() => scrollToSection('home')}
-                            >
-                                Home
-                            </span>
-                        </li>
-                        <li className="nav-item">
-                            <span
-                                className={`nav-link ${activeSection === 'know-your-ra' && !isDisclaimersOpen ? 'active' : ''}`}
-                                onClick={() => scrollToSection('know-your-ra')}
-                            >
-                                Know Your RA
-                            </span>
-                        </li>
-                        <li className="nav-item">
-                            <span
-                                className={`nav-link ${activeSection === 'pricing' && !isDisclaimersOpen ? 'active' : ''}`}
-                                onClick={() => scrollToSection('pricing')}
-                            >
-                                Pricing
-                            </span>
-                        </li>
-                        <li className="nav-item">
-                            <span
-                                className={`nav-link ${activeSection === 'courses' && !isDisclaimersOpen ? 'active' : ''}`}
-                                onClick={() => scrollToSection('courses')}
-                            >
-                                Courses
-                            </span>
-                        </li>
-                        <li className="nav-item">
-                            <span
-                                className={`nav-link ${activeSection === 'faqs' && !isDisclaimersOpen ? 'active' : ''}`}
-                                onClick={() => scrollToSection('faqs')}
-                            >
-                                FAQs
-                            </span>
-                        </li>
-                        {/* Disclaimers Dropdown */}
+                        {/* Main Navigation Items */}
+                        {[
+                            { id: 'home', label: 'Home' },
+                            { id: 'know-your-ra', label: 'Know Your RA' },
+                            { id: 'pricing', label: 'Pricing' },
+                            { id: 'courses', label: 'Courses' },
+                            { id: 'faqs', label: 'FAQs' }
+                        ].map((item) => (
+                            <li className="nav-item" key={item.id}>
+                                <span
+                                    className={`nav-link ${activeSection === item.id && !isDisclaimersOpen ? 'active' : ''}`}
+                                    onClick={() => scrollToSection(item.id)}
+                                >
+                                    {item.label}
+                                </span>
+                            </li>
+                        ))}
+
+                        {/* Disclaimers Dropdown (Dynamic) */}
                         <li className="nav-item dropdown-item">
                             <div
                                 className={`nav-link dropdown-toggle ${isDisclaimersOpen ? 'active' : ''}`}
-                                onClick={(e) => {
-                                    toggleDisclaimers(e);
-                                }}
+                                onClick={(e) => toggleDisclaimers(e)}
                                 style={{ cursor: 'pointer', userSelect: 'none' }}
                                 role="button"
                                 tabIndex={0}
@@ -195,57 +181,32 @@ const Header = () => {
                             </div>
                             {isDisclaimersOpen && (
                                 <div className="dropdown-menu" onClick={(e) => e.stopPropagation()}>
-                                    <Link to="/bank-account-details" className="dropdown-link" onClick={() => setIsDisclaimersOpen(false)}>
-                                        Bank Account Details
-                                    </Link>
-                                    <div className="dropdown-divider"></div>
-                                    <Link to="/registered-research-analyst" className="dropdown-link" onClick={() => setIsDisclaimersOpen(false)}>
-                                        Registered Research Analyst
-                                    </Link>
-                                    <div className="dropdown-divider"></div>
-                                    <Link to="/code-of-conduct" className="dropdown-link" onClick={() => setIsDisclaimersOpen(false)}>
-                                        Code of Conduct
-                                    </Link>
-                                    <div className="dropdown-divider"></div>
-                                    <Link to="/complaints-data" className="dropdown-link" onClick={() => setIsDisclaimersOpen(false)}>
-                                        Complaints Data
-                                    </Link>
-                                    <div className="dropdown-divider"></div>
-                                    <Link to="/escalation-matrix" className="dropdown-link" onClick={() => setIsDisclaimersOpen(false)}>
-                                        Escalation Matrix
-                                    </Link>
-                                    <div className="dropdown-divider"></div>
-                                    <Link to="/general-disclaimer" className="dropdown-link" onClick={() => setIsDisclaimersOpen(false)}>
-                                        General Disclaimer
-                                    </Link>
-                                    <div className="dropdown-divider"></div>
-                                    <Link to="/investor-charter" className="dropdown-link" onClick={() => setIsDisclaimersOpen(false)}>
-                                        Investor Charter
-                                    </Link>
-                                    <div className="dropdown-divider"></div>
-                                    <Link to="/privacy-policy" className="dropdown-link" onClick={() => setIsDisclaimersOpen(false)}>
-                                        Privacy Policy
-                                    </Link>
-                                    <div className="dropdown-divider"></div>
-                                    <Link to="/standard-disclosures" className="dropdown-link" onClick={() => setIsDisclaimersOpen(false)}>
-                                        Standard Disclosures
-                                    </Link>
-                                    <div className="dropdown-divider"></div>
-                                    <Link to="/grievance-redressal" className="dropdown-link" onClick={() => setIsDisclaimersOpen(false)}>
-                                        Grievance Redressal
-                                    </Link>
-                                    <div className="dropdown-divider"></div>
-                                    <Link to="/terms-of-use" className="dropdown-link" onClick={() => setIsDisclaimersOpen(false)}>
-                                        Terms of Use
-                                    </Link>
-                                    <div className="dropdown-divider"></div>
-                                    <Link to="/refund" className="dropdown-link" onClick={() => setIsDisclaimersOpen(false)}>
-                                        Refund
-                                    </Link>
-                                    <div className="dropdown-divider"></div>
-                                    <Link to="/mitc" className="dropdown-link" onClick={() => setIsDisclaimersOpen(false)}>
-                                        Most Important Terms & Conditions
-                                    </Link>
+                                    {[
+                                        { to: '/bank-account-details', label: 'Bank Account Details' },
+                                        { to: '/registered-research-analyst', label: 'Registered Research Analyst' },
+                                        { to: '/code-of-conduct', label: 'Code of Conduct' },
+                                        { to: '/complaints-data', label: 'Complaints Data' },
+                                        { to: '/escalation-matrix', label: 'Escalation Matrix' },
+                                        { to: '/general-disclaimer', label: 'General Disclaimer' },
+                                        { to: '/investor-charter', label: 'Investor Charter' },
+                                        { to: '/privacy-policy', label: 'Privacy Policy' },
+                                        { to: '/standard-disclosures', label: 'Standard Disclosures' },
+                                        { to: '/grievance-redressal', label: 'Grievance Redressal' },
+                                        { to: '/terms-of-use', label: 'Terms of Use' },
+                                        { to: '/refund', label: 'Refund' },
+                                        { to: '/mitc', label: 'Most Important Terms & Conditions' }
+                                    ].map((link, index, array) => (
+                                        <React.Fragment key={link.to}>
+                                            <Link
+                                                to={link.to}
+                                                className="dropdown-link"
+                                                onClick={() => setIsDisclaimersOpen(false)}
+                                            >
+                                                {link.label}
+                                            </Link>
+                                            {index < array.length - 1 && <div className="dropdown-divider"></div>}
+                                        </React.Fragment>
+                                    ))}
                                 </div>
                             )}
                         </li>

@@ -338,25 +338,8 @@
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-    animation-delay: 0.2s;
 }
 
-.journey-btn {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.8s ease forwards;
-    animation-delay: 0.8s;
-}
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 /* Home Responsive */
 @media (max-width: 768px) {
@@ -769,6 +752,12 @@
     box-shadow: none;
     background: transparent;
     overflow: visible;
+    height: 100%;
+}
+
+.why-us-reveal-wrapper {
+    display: flex;
+    height: 100%;
 }
 
 .why-us-card::before {
@@ -897,6 +886,9 @@
     animation: cardEntrance 1s ease-out forwards, floating 6s ease-in-out infinite;
     overflow: hidden;
     will-change: transform;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .pricing-card-v2:hover {
@@ -1646,10 +1638,13 @@ textarea.frosted-input-v2 {
 }
 
 .signature-col {
+    /* flex: 1.5; */
+    /* Increased flex share to give more room for the large image */
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    /* Center horizontally in flex item */
     justify-content: center;
-    text-align: center;
+    padding: 0 1rem;
 }
 
 .social-col-v4 {
@@ -1658,22 +1653,56 @@ textarea.frosted-input-v2 {
 }
 
 .footer-signature {
-    font-family: 'Dancing Script', cursive;
-    font-size: 3.8rem;
-    /* Bigger for style */
-    color: var(--secondary);
-    margin-bottom: -0.5rem;
-    /* Tighter with line below */
-    text-shadow: 2px 2px 20px rgba(82, 171, 152, 0.4);
-    white-space: nowrap;
-    transform: rotate(-2deg);
-    /* Added slight tilt for stylishness */
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 120px;
+    padding: 0 2rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-signature-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.main-signature-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.main-signature-img:hover {
+    transform: scale(1.05);
 }
 
 .signature-ra-tag {
     font-size: 0.9rem;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 0.5px;
+}
+
+.footer-reg-info-v4 {
+    margin-top: 1rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 80%;
+    text-align: center;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.95rem;
     letter-spacing: 0.5px;
 }
 
@@ -2107,6 +2136,8 @@ textarea.frosted-input-v2 {
 
 .pricing-grid-v2 {
     display: flex;
+    align-items: stretch;
+    /* Ensure children stretch to same height */
     overflow-x: auto;
     gap: 3rem;
     padding: 3rem 1.5rem 3rem;
@@ -2122,22 +2153,36 @@ textarea.frosted-input-v2 {
     /* Start from left for multiple cards */
 }
 
-/* Hide scrollbar for Webkit browsers */
-.pricing-grid-v2::-webkit-scrollbar {
-    display: none;
-}
-
-.pricing-card-v2 {
+/* Ensure the Reveal wrapper around pricing cards also stretches */
+.pricing-grid-v2>div {
+    display: flex;
     flex: 0 0 450px;
-    /* Fixed width for horizontal layout */
+    /* Moved from card to wrapper */
     scroll-snap-align: center;
 }
 
 @media (max-width: 600px) {
-    .pricing-card-v2 {
+    .pricing-grid-v2>div {
         flex: 0 0 85vw;
-        /* Almost full width on mobile */
     }
+}
+
+.pricing-card-v2 {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    /* Ensure it fills wrapper width */
+}
+
+.pricing-features-v2 {
+    flex-grow: 1;
+    /* Pushes the button to the bottom */
+}
+
+/* Hide scrollbar for Webkit browsers */
+.pricing-grid-v2::-webkit-scrollbar {
+    display: none;
 }
 
 /* Pricing Slider Fade Effect */
@@ -2448,7 +2493,8 @@ textarea.frosted-input-v2 {
     position: relative;
 }
 
-/* Back Button */
+/* Cleaned up duplicate block */
+
 .back-button {
     display: inline-flex;
     align-items: center;

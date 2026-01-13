@@ -1,5 +1,6 @@
 import React from 'react';
 import Section from '../components/Section';
+import Reveal from '../components/Reveal';
 import './Project.css';
 
 const TestimonialsPage = () => {
@@ -18,20 +19,27 @@ const TestimonialsPage = () => {
     return (
         <Section
             id="testimonials"
-            title="What Our Clients Say"
-            subtitle="Real feedback from real traders"
             background="light"
             className="testimonials-section-wrapper"
         >
-            <div className="testimonials-slider-container">
-                <div className="testimonials-track">
-                    {testimonials.map((t, index) => (
-                        <div key={index} className="testimonial-card">
-                            <img src={t.img} alt={`Testimonial ${t.id}`} className="testimonial-img" />
-                        </div>
-                    ))}
+            <Reveal direction="up">
+                <div className="section-header align-center">
+                    <h2 className="section-title">What Our Clients Say</h2>
+                    <p className="section-subtitle">Real feedback from real traders</p>
                 </div>
-            </div>
+            </Reveal>
+
+            <Reveal direction="up" delay={1}>
+                <div className="testimonials-slider-container">
+                    <div className="testimonials-track">
+                        {testimonials.map((t, index) => (
+                            <div key={index} className="testimonial-card">
+                                <img src={t.img} alt={`Testimonial ${t.id}`} className="testimonial-img" />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </Reveal>
         </Section>
     );
 };

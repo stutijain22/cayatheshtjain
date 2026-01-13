@@ -1,5 +1,6 @@
 import React from 'react';
 import Section from '../components/Section';
+import Reveal from '../components/Reveal';
 import './Project.css';
 
 const WhyUs = () => {
@@ -45,33 +46,45 @@ const WhyUs = () => {
     return (
         <Section
             id="why-us"
-            title="Why Choose Us"
-            subtitle="Distinguishing factors that set us apart in your financial journey"
             background="dark"
             className="why-us-section"
         >
+            <Reveal direction="up">
+                <div className="section-header align-center">
+                    <h2 className="section-title">Why Choose Us</h2>
+                    <p className="section-subtitle">Distinguishing factors that set us apart in your financial journey</p>
+                </div>
+            </Reveal>
+
             <div className="why-us-grid">
-                {features.map((feature) => (
-                    <div key={feature.id} className="why-us-card">
-                        <div className="card-white-circle">
-                            <div className="card-icon-wrapper">
-                                {feature.icon.endsWith('.mp4') ? (
-                                    <video
-                                        src={feature.icon}
-                                        autoPlay
-                                        muted
-                                        loop
-                                        playsInline
-                                        className="card-icon-video"
-                                    />
-                                ) : (
-                                    <span className="card-icon">{feature.icon}</span>
-                                )}
+                {features.map((feature, index) => (
+                    <Reveal
+                        key={feature.id}
+                        direction="up"
+                        delay={(index % 3) + 1}
+                        className="why-us-reveal-wrapper"
+                    >
+                        <div className="why-us-card">
+                            <div className="card-white-circle">
+                                <div className="card-icon-wrapper">
+                                    {feature.icon.endsWith('.mp4') ? (
+                                        <video
+                                            src={feature.icon}
+                                            autoPlay
+                                            muted
+                                            loop
+                                            playsInline
+                                            className="card-icon-video"
+                                        />
+                                    ) : (
+                                        <span className="card-icon">{feature.icon}</span>
+                                    )}
+                                </div>
+                                <h3 className="card-title">{feature.title}</h3>
+                                <p className="card-description">{feature.description}</p>
                             </div>
-                            <h3 className="card-title">{feature.title}</h3>
-                            <p className="card-description">{feature.description}</p>
                         </div>
-                    </div>
+                    </Reveal>
                 ))}
             </div>
         </Section>

@@ -423,3 +423,58 @@ button {
         font-size: var(--font-base);
     }
 }
+
+.reveal {
+    opacity: 0;
+    filter: blur(10px);
+    transition: opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+        transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+        filter 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: transform, opacity, filter;
+}
+
+.reveal.reveal-up {
+    transform: translateY(60px) scale(0.95);
+}
+
+.reveal.reveal-left {
+    transform: translateX(-60px) scale(0.95);
+}
+
+.reveal.reveal-right {
+    transform: translateX(60px) scale(0.95);
+}
+
+.reveal.active {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(0, 0) scale(1) !important;
+}
+
+/* Different animation pattern for Disclaimer pages */
+.reveal.disclaimer-reveal {
+    transition: opacity 1.8s cubic-bezier(0.19, 1, 0.22, 1),
+        transform 1.8s cubic-bezier(0.19, 1, 0.22, 1),
+        filter 1.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Stagger delays */
+.reveal.delay-1 {
+    transition-delay: 0.1s;
+}
+
+.reveal.delay-2 {
+    transition-delay: 0.2s;
+}
+
+.reveal.delay-3 {
+    transition-delay: 0.3s;
+}
+
+.reveal.delay-4 {
+    transition-delay: 0.4s;
+}
+
+.reveal.delay-5 {
+    transition-delay: 0.5s;
+}

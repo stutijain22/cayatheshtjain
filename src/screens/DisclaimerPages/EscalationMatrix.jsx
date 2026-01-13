@@ -1,4 +1,5 @@
 import React from 'react';
+import Reveal from '../../components/Reveal';
 import '../Project.css';
 
 const EscalationMatrix = () => {
@@ -21,39 +22,43 @@ const EscalationMatrix = () => {
         <div className="rra-page">
             <div className="rra-container">
                 {/* Header */}
-                <div className="rra-header">
-                    <h1 className="rra-title">Escalation Matrix</h1>
-                    <p className="rra-subtitle">If you have a grievance, you can reach out to our Support Team for assistance.</p>
-                </div>
+                <Reveal direction="up" className="disclaimer-reveal">
+                    <div className="rra-header">
+                        <h1 className="rra-title">Escalation Matrix</h1>
+                        <p className="rra-subtitle">If you have a grievance, you can reach out to our Support Team for assistance.</p>
+                    </div>
+                </Reveal>
 
                 {/* Table Section */}
                 <div className="complaints-data-section">
-                    <div style={{ borderRadius: '12px', overflow: 'hidden', boxShadow: '0 15px 45px rgba(0,0,0,0.08)' }}>
-                        <table className="custom-table" style={{ borderCollapse: 'collapse', width: '100%', margin: 0 }}>
-                            <thead>
-                                <tr>
-                                    <th>Contact Person Name</th>
-                                    <th>Details of Designation</th>
-                                    <th>Address</th>
-                                    <th>Contact</th>
-                                    <th>Email ID</th>
-                                    <th>Working Hours</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {tableData.map((row, index) => (
-                                    <tr key={index}>
-                                        <td style={{ fontWeight: '600', color: 'var(--primary)' }}>{row.label}</td>
-                                        <td>{row.name}</td>
-                                        <td style={{ fontSize: '0.85rem', maxWidth: '300px', textAlign: 'left' }}>{commonDetails.address}</td>
-                                        <td>{commonDetails.contact}</td>
-                                        <td><a href={`mailto:${commonDetails.email}`} style={{ color: 'var(--secondary)', textDecoration: 'none' }}>{commonDetails.email}</a></td>
-                                        <td>{commonDetails.hours}</td>
+                    <Reveal direction="up" delay={0.3} className="disclaimer-reveal">
+                        <div style={{ borderRadius: '12px', overflow: 'hidden', boxShadow: '0 15px 45px rgba(0,0,0,0.08)' }}>
+                            <table className="custom-table" style={{ borderCollapse: 'collapse', width: '100%', margin: 0 }}>
+                                <thead>
+                                    <tr>
+                                        <th>Contact Person Name</th>
+                                        <th>Details of Designation</th>
+                                        <th>Address</th>
+                                        <th>Contact</th>
+                                        <th>Email ID</th>
+                                        <th>Working Hours</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                    {tableData.map((row, index) => (
+                                        <tr key={index}>
+                                            <td style={{ fontWeight: '600', color: 'var(--primary)' }}>{row.label}</td>
+                                            <td>{row.name}</td>
+                                            <td style={{ fontSize: '0.85rem', maxWidth: '300px', textAlign: 'left' }}>{commonDetails.address}</td>
+                                            <td>{commonDetails.contact}</td>
+                                            <td><a href={`mailto:${commonDetails.email}`} style={{ color: 'var(--secondary)', textDecoration: 'none' }}>{commonDetails.email}</a></td>
+                                            <td>{commonDetails.hours}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </Reveal>
                 </div>
             </div>
         </div>
