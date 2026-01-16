@@ -24,6 +24,7 @@ import StandardDisclosures from './screens/DisclaimerPages/StandardDisclosures'
 import TermsOfUse from './screens/DisclaimerPages/TermsOfUse'
 import Refund from './screens/DisclaimerPages/Refund'
 import MITC from './screens/DisclaimerPages/MITC'
+import PANVerification from './screens/PanVerification'
 import './App.css'
 
 import WhyUs from './screens/WhyUs'
@@ -95,6 +96,7 @@ function AppContent() {
           <Route path="/terms-of-use" element={<TermsOfUse />} />
           <Route path="/refund" element={<Refund />} />
           <Route path="/mitc" element={<MITC />} />
+          <Route path="/pan-verification" element={<PANVerification />} />
         </Route>
       </Routes>
     </BrowserRouter>

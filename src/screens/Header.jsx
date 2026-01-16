@@ -135,10 +135,7 @@ const Header = () => {
         <header className="header">
             <div className="header-container">
                 <div className="logo-container" onClick={() => scrollToSection('home')} style={{ cursor: 'pointer' }}>
-                    <img src="/webLogo.jpg" alt="CA Yathesht Jain" className="header-logo" />
-                    <div className="logo-text-group">
-                        <span className="logo-name-main">Yathesht Jain</span>
-                    </div>
+                    <img src="/headerLogoImage.jpg" alt="CA Yathesht Jain" className="header-logo" />
                 </div>
 
                 <nav className={`nav ${isMenuOpen ? 'nav-open' : ''}`}>

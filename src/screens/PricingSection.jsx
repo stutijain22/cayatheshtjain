@@ -1,10 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Section from '../components/Section';
 import Button from '../components/Button';
 import Reveal from '../components/Reveal';
 import './Project.css';
 
 const PricingSection = () => {
+    const navigate = useNavigate();
     const plans = [
         {
             name: "Quarterly",
@@ -88,7 +90,7 @@ const PricingSection = () => {
                                     variant="primary"
                                     fullWidth
                                     className="pricing-btn-v2"
-                                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                                    onClick={() => navigate('/pan-verification')}
                                 >
                                     GET STARTED NOW
                                 </Button>

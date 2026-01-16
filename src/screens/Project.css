@@ -36,11 +36,11 @@
 }
 
 .header-logo {
-    height: 55px;
+    height: 78px;
     /* Adjusted to fit header height */
     width: auto;
     object-fit: contain;
-    transition: transform 0.3s ease;
+    /* transition: transform 0.3s ease; */
 }
 
 .logo-text-group {
@@ -877,7 +877,7 @@
     border-radius: 50px;
     padding: 0rem 0rem 2rem 0rem;
     /* Horizontal padding moved to internal elements for flush header */
-    max-width: 600px;
+    max-width: 400px;
     width: 95%;
     text-align: center;
     transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -898,7 +898,7 @@
 
 .pricing-card-header-v2 {
     background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
-    padding: 3.5rem 2.5rem;
+    padding: 2.5rem 1.5rem;
     border-bottom: 2px solid rgba(255, 255, 255, 0.1);
     border-top-left-radius: 46px;
     /* Slightly adjusted for border thickness */
@@ -957,7 +957,7 @@
 }
 
 .pricing-price-v2 {
-    font-size: 4.5rem;
+    font-size: 2.5rem;
     font-weight: 900;
     color: #ffffff;
     /* High contrast on dark gradient header */
@@ -993,7 +993,7 @@
 
 .pricing-features-v2 {
     list-style: none;
-    padding: 0 4rem;
+    padding: 0 2rem;
     /* Added horizontal padding to list */
     margin: 0 0 2rem 0;
     text-align: left;
@@ -1894,23 +1894,41 @@ textarea.frosted-input-v2 {
 .footer-brand-text-block {
     display: flex;
     flex-direction: column;
-    text-align: left;
+    text-align: center;
     justify-content: center;
+    align-items: center;
 }
 
-.footer-brand-v4 {
+.footer-brand-text-v4 {
     font-size: 2.2rem;
-    /* Larger brand name */
     font-weight: 800;
     margin-bottom: 0.5rem;
     color: #ffffff;
     line-height: 1;
 }
 
+.footer-brand-text-img {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 0.8rem;
+    display: block;
+}
+
+.footer-brand-video {
+    height: 180px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 0.8rem;
+    /* opacity: 1; */
+    filter: none;
+    mix-blend-mode: lighten;
+}
+
 .footer-contact-v4-group {
     display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
+    flex-direction: row;
+    gap: 1.5rem;
 }
 
 .footer-contact-item {
@@ -2139,7 +2157,6 @@ textarea.frosted-input-v2 {
     align-items: stretch;
     /* Ensure children stretch to same height */
     overflow-x: auto;
-    gap: 3rem;
     padding: 3rem 1.5rem 3rem;
     /* Reduced bottom padding */
     scroll-behavior: smooth;
@@ -2151,12 +2168,14 @@ textarea.frosted-input-v2 {
     /* Hide scrollbar for IE and Edge */
     justify-content: flex-start;
     /* Start from left for multiple cards */
+    gap: 1rem;
 }
 
 /* Ensure the Reveal wrapper around pricing cards also stretches */
 .pricing-grid-v2>div {
     display: flex;
-    flex: 0 0 450px;
+    flex: 0 0 430px;
+    justify-content: center;
     /* Moved from card to wrapper */
     scroll-snap-align: center;
 }

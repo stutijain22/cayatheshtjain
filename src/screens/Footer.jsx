@@ -13,11 +13,15 @@ const Footer = () => {
                     {/* Left: Branding & Contact */}
                     <div className="footer-v4-col branding-col">
                         <div className="footer-logo-brand-group">
-                            <div className="footer-logo-container">
-                                <img src="/webLogo.jpg" alt="Logo" className="footer-logo" />
-                            </div>
                             <div className="footer-brand-text-block">
-                                <h1 className="footer-brand-v4">Yathesht Jain</h1>
+                                <video
+                                    src="/footerLogoVide.mp4"
+                                    className="footer-brand-video"
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                />
                                 <div className="footer-contact-v4-group">
                                     <div className="footer-contact-item">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
